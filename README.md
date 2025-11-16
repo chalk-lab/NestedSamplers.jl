@@ -6,8 +6,8 @@
 [![Coverage](https://codecov.io/gh/TuringLang/NestedSamplers.jl/branch/main/graph/badge.svg)](https://codecov.io/gh/TuringLang/NestedSamplers.jl)
 [![LICENSE](https://img.shields.io/github/license/TuringLang/NestedSamplers.jl?color=yellow)](LICENSE)
 
-[![Stable](https://img.shields.io/badge/docs-stable-blue.svg)](https://TuringLang.github.io/NestedSamplers.jl/stable)
-[![Dev](https://img.shields.io/badge/docs-dev-blue.svg)](https://TuringLang.github.io/NestedSamplers.jl/dev)
+[![Stable](https://img.shields.io/badge/docs-stable-blue.svg)](https://chalk-lab.github.io/NestedSamplers.jl/stable)
+[![Dev](https://img.shields.io/badge/docs-dev-blue.svg)](https://chalk-lab.github.io/NestedSamplers.jl/dev)
 
 Implementations of single- and multi-ellipsoidal nested sampling algorithms in pure Julia. We implement the [AbstractMCMC.jl](https://github.com/TuringLang/AbstractMCMC.jl) interface, allowing straightforward sampling from a variety of statistical models.
 
