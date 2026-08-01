@@ -2,12 +2,14 @@
 
 ## Breaking changes
 
-The minimum supported Julia version is now 1.10, and AbstractMCMC 3 and 4 are no longer supported.
+Requires Julia 1.10 and AbstractMCMC 5.10 or later.
 
-AbstractMCMC 5.10 replaced the boolean `progress` keyword argument with `AbstractProgressKwarg` instances. `nested_isdone` used that value in a boolean context, so sampling failed with a `TypeError` on those releases. The value is now interpreted by type, which is why AbstractMCMC 5.10 or later is required.
+Sampling threw a `TypeError` on AbstractMCMC 5.10 and later, which swapped the boolean `progress` keyword for `AbstractProgressKwarg` instances. `nested_isdone` now reads it by type.
 
-`AbstractMCMC.step(rng, model, sampler, state)` was previously defined for every sampler type. It is now restricted to `sampler::Nested`, the only case NestedSamplers ever used it for.
+`AbstractMCMC.step(rng, model, sampler, state)` is now restricted to `sampler::Nested` instead of matching every sampler type.
+
+MCMCChains compat is now `"6, 7"`. Earlier versions cap AbstractMCMC below 5, so they cannot resolve anyway.
 
 ## Other changes
 
-MCMCChains 7, LogExpFunctions 1, and Parameters 0.13 are now allowed.
+LogExpFunctions 1 and Parameters 0.13 are now allowed.
