@@ -16,4 +16,4 @@ MCMCChains compat is now `"6, 7"`. Earlier versions cap AbstractMCMC below 5, so
 
 The package moved from TuringLang to the chalk-lab organisation. Docs are now served from https://chalk-lab.github.io/NestedSamplers.jl.
 
-LogExpFunctions 1 and Parameters 0.13 are now allowed.
+Parameters 0.13 is now allowed.
