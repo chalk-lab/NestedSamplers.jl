@@ -26,6 +26,7 @@ Bounds.AbstractBoundingSpace
 Bounds.NoBounds
 Bounds.Ellipsoid
 Bounds.MultiEllipsoid
+Bounds.rand_live
 ```
 
 ## Proposals
