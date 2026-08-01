@@ -13,6 +13,7 @@ AbstractMCMC.setprogress!(get(ENV, "CI", "false") == "false")
 
 include("utils.jl")
 
+@testset "Aqua" begin include("aqua.jl") end
 @testset "Deprecations" begin include("deprecations.jl") end
 @testset "Bounds" begin include("bounds/bounds.jl") end
 @testset "Proposals" begin include("proposals/proposals.jl") end
