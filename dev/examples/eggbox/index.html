@@ -530,7 +530,7 @@ heatmap(
     ylims=extrema(y),
     xlabel=&quot;x&quot;,
     ylabel=&quot;y&quot;,
-)</code></pre><img src="28b9b570.svg" alt="Example block output"/><h2 id="Sample"><a class="docs-heading-anchor" href="#Sample">Sample</a><a id="Sample-1"></a><a class="docs-heading-anchor-permalink" href="#Sample" title="Permalink"></a></h2><pre><code class="language-julia hljs">using MCMCChains
+)</code></pre><img src="228f26fd.svg" alt="Example block output"/><h2 id="Sample"><a class="docs-heading-anchor" href="#Sample">Sample</a><a id="Sample-1"></a><a class="docs-heading-anchor-permalink" href="#Sample" title="Permalink"></a></h2><pre><code class="language-julia hljs">using MCMCChains
 using StatsBase
 # using multi-ellipsoid for bounds
 # using default rejection sampler for proposals
@@ -549,13 +549,13 @@ Use `describe(chains)` for summary statistics and quantiles.
 </code></pre><pre><code class="language-julia hljs">marginalkde(chain[:x], chain[:y])
 plot!(xlims=(0, 1), ylims=(0, 1), sp=2)
 plot!(xlims=(0, 1), sp=1)
-plot!(ylims=(0, 1), sp=3)</code></pre><img src="d8649778.svg" alt="Example block output"/><pre><code class="language-julia hljs">density(chain_resampled, xlims=(0, 1))
+plot!(ylims=(0, 1), sp=3)</code></pre><img src="4684aea7.svg" alt="Example block output"/><pre><code class="language-julia hljs">density(chain_resampled, xlims=(0, 1))
 vline!(0.1:0.2:0.9, c=:black, ls=:dash, sp=1)
-vline!(0.1:0.2:0.9, c=:black, ls=:dash, sp=2)</code></pre><img src="3a372e17.svg" alt="Example block output"/><pre><code class="language-julia hljs">using Measurements
+vline!(0.1:0.2:0.9, c=:black, ls=:dash, sp=2)</code></pre><img src="4acb3463.svg" alt="Example block output"/><pre><code class="language-julia hljs">using Measurements
 logz_est = state.logz ± state.logzerr
 diff = logz_est - logz
 println(&quot;logz: $logz&quot;)
 println(&quot;estimate: $logz_est&quot;)
 println(&quot;diff: $diff&quot;)</code></pre><pre class="documenter-example-output"><code class="nohighlight hljs ansi">logz: 235.88
 estimate: 235.94 ± 0.11
-diff: 0.065 ± 0.11</code></pre></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../correlated/">« Correlated Gaussian</a><a class="docs-footer-nextpage" href="../../benchmarks/">Benchmarks »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="auto">Automatic (OS)</option><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option><option value="catppuccin-latte">catppuccin-latte</option><option value="catppuccin-frappe">catppuccin-frappe</option><option value="catppuccin-macchiato">catppuccin-macchiato</option><option value="catppuccin-mocha">catppuccin-mocha</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 1.17.0 on <span class="colophon-date" title="Saturday 1 August 2026 19:14">Saturday 1 August 2026</span>. Using Julia version 1.12.6.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
+diff: 0.065 ± 0.11</code></pre></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../correlated/">« Correlated Gaussian</a><a class="docs-footer-nextpage" href="../../benchmarks/">Benchmarks »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="auto">Automatic (OS)</option><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option><option value="catppuccin-latte">catppuccin-latte</option><option value="catppuccin-frappe">catppuccin-frappe</option><option value="catppuccin-macchiato">catppuccin-macchiato</option><option value="catppuccin-mocha">catppuccin-mocha</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 1.17.0 on <span class="colophon-date" title="Saturday 1 August 2026 19:26">Saturday 1 August 2026</span>. Using Julia version 1.12.6.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
