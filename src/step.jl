@@ -39,7 +39,7 @@ function step(rng, model, sampler::Nested; kwargs...)
     return sample, state
 end
 
-function step(rng, model, sampler, state; kwargs...)
+function step(rng, model, sampler::Nested, state; kwargs...)
     ## Update bounds
     pointvol = exp(state.logvol) / sampler.nactive
     # check if ready for first update
