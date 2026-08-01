@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>API/Reference · NestedSamplers.jl</title><meta name="title" content="API/Reference · NestedSamplers.jl"/><meta property="og:title" content="API/Reference · NestedSamplers.jl"/><meta property="twitter:title" content="API/Reference · NestedSamplers.jl"/><meta name="description" content="Documentation for NestedSamplers.jl."/><meta property="og:description" content="Documentation for NestedSamplers.jl."/><meta property="twitter:description" content="Documentation for NestedSamplers.jl."/><script data-outdated-warner src="../assets/warner.js"></script><link href="https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/css/lato-font.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/juliamono/0.050/juliamono.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/fontawesome.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/solid.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/brands.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css" rel="stylesheet" type="text/css"/><script>documenterBaseURL=".."</script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="../assets/documenter.js"></script><script src="../search_index.js"></script><script src="../siteinfo.js"></script><script src="../../versions.js"></script><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/catppuccin-mocha.css" data-theme-name="catppuccin-mocha"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/catppuccin-macchiato.css" data-theme-name="catppuccin-macchiato"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/catppuccin-frappe.css" data-theme-name="catppuccin-frappe"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/catppuccin-latte.css" data-theme-name="catppuccin-latte"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/documenter-dark.css" data-theme-name="documenter-dark" data-theme-primary-dark/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/documenter-light.css" data-theme-name="documenter-light" data-theme-primary/><script src="../assets/themeswap.js"></script></head><body>
+<!-- NAVBAR START -->
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap');
+
+    /* Documenter.jl CSS Overrides */
+    html {
+        scroll-padding-top: calc(var(--navbar-height) + 1rem);
+    }
+    .docs-sidebar, #documenter {
+        margin-top: var(--navbar-height);
+    }
+    .docs-version-selector {
+        margin-bottom: 60px !important;
+    }
+    @media screen and (max-width: 1056px) {
+        .docs-version-selector {
+            margin-bottom: 60px !important;
+        }
+        .docs-sidebar {
+            margin-top: 0 !important;
+        }
+    }
+    /* End of Documenter.jl Tweaks */
+
+    /* DocumenterVitepress integration:
+       Vitepress's default theme already exposes `--vp-layout-top-height` as
+       the hook for adding banner-style chrome above its own nav. Every
+       layout-sensitive component (`.VPNav` `top`, `.VPContent` `margin`,
+       `.VPSidebar` `top`, `.VPLocalNav` `padding-top`, `.VPDocAside` `top`
+       and TOC `padding-top`) is already authored to add this variable to
+       its own offset, so binding it to the TuringLang navbar height makes
+       Vitepress reflow itself correctly with zero further intervention.
+       (`:has(.VPNavBar)` scopes this to Vitepress builds; Documenter HTML
+       sites are untouched.) */
+    html:has(.VPNavBar) {
+        --vp-layout-top-height: var(--navbar-height);
+    }
+
+    /* When the rendered site is Vitepress (detected by .VPNavBar being in the
+       DOM), adopt Vitepress's design tokens so the TuringLang navbar tracks
+       the active theme (light/dark, brand colour, body font) and reads as one
+       piece of chrome with the Vitepress nav below it — rather than a stacked
+       second header with its own colour and typography. */
+    html:has(.VPNavBar) {
+        --primary-bg: var(--vp-c-bg);
+        --heading-color: var(--vp-c-text-1);
+        --item-color: var(--vp-c-text-2);
+        --icon-color: var(--vp-c-text-1);
+        --hover-color: var(--vp-c-brand-1);
+        --shadow-color: var(--vp-c-divider);
+        --dropdown-hover-bg: var(--vp-c-default-soft);
+        --font-family: var(--vp-font-family-base);
+    }
+    html:has(.VPNavBar) .ext-navigation {
+        box-shadow: none;
+        border-bottom: 1px solid var(--vp-c-divider);
+    }
+    /* End of DocumenterVitepress Tweaks */
+
+    /* Color and Font Variables */
+    :root {
+        --heading-color: #6c757d;
+        --item-color: rgb(165, 165, 165);
+        --primary-bg: white;
+        --hover-color: #8faad2;
+        --deprecated-bg: #ff4d4d;
+        --deprecated-text: white;
+        --icon-color: #6c757d;
+        --shadow-color: rgba(0, 0, 0, 0.1);
+        --dropdown-hover-bg: #e9ecef;
+        
+        /* Typography */
+        --font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+        --nav-link-font-size: 1.0625rem;
+        --turing-title-font-size: 21.25px;
+        --icon-font-size: 1.25rem;
+        --dropdown-arrow-font-size: 0.6875rem;
+        --badge-font-size: 0.75rem;
+
+        /* Sizing and Spacing */
+        --navbar-height: 3.75rem;
+        --logo-height: 31px;
+        --logo-width: auto;
+        --logo-padding-top: 7px;
+        --logo-margin-left: 0.8rem;
+        --title-margin-left: 0.4px;
+        --title-nav-spacing: 1.1rem;
+        --nav-item-margin-left: 1.3rem;
+        --icon-margin-left: 1rem;
+        --dropdown-padding: 1.875rem;
+        --dropdown-item-width: 12.5rem;
+        --dropdown-subitem-width: 15.625rem;
+        --dropdown-subitem-padding: 0.125rem 0.625rem;
+    }
+
+    /* Dark Theme Variable Overrides */
+    html.theme--documenter-dark {
+        --heading-color: #e0e0e0;
+        --item-color: #bdbdbd;
+        --primary-bg: #1f2424;
+        --hover-color: #ffffff;
+        --icon-color: #e0e0e0;
+        --shadow-color: rgba(255, 255, 255, 0.1);
+        --dropdown-hover-bg: #424242;
+    }
+
+    /* Catppuccin Theme Overrides */
+    html.theme--catppuccin-latte {
+        --heading-color: #4c4f69;
+        --primary-bg: #eff1f5;
+        --icon-color: #4c4f69;
+        --shadow-color: rgba(0, 0, 0, 0.1);
+        --dropdown-hover-bg: #e6e9ef;
+    }
+    html.theme--catppuccin-frappe {
+        --heading-color: #c6d0f5;
+        --primary-bg: #303446;
+        --icon-color: #c6d0f5;
+        --shadow-color: rgba(255, 255, 255, 0.1);
+        --dropdown-hover-bg: #51576d;
+    }
+    html.theme--catppuccin-macchiato {
+        --heading-color: #cad3f5;
+        --primary-bg: #24273a;
+        --icon-color: #cad3f5;
+        --shadow-color: rgba(255, 255, 255, 0.1);
+        --dropdown-hover-bg: #494d64;
+    }
+    html.theme--catppuccin-mocha {
+        --heading-color: #cad3f5;
+        --primary-bg: #1e1e2e;
+        --icon-color: #cad3f5;
+        --shadow-color: rgba(255, 255, 255, 0.1);
+        --dropdown-hover-bg: #45475a;
+    }
+
+
+    /* Main Navigation Bar */
+    .ext-navigation {
+        font-family: var(--font-family);
+        position: fixed;
+        height: var(--navbar-height);
+        top: 0;
+        width: 100%;
+        background-color: var(--primary-bg);
+        z-index: 1000;
+        box-shadow: 0 2px 4px var(--shadow-color);
+        display: flex;
+        align-items: center;
+        padding: 0 1.0625rem;
+        transition: transform 0.3s, background-color 0.3s;
+    }
+
+    nav.ext-navigation .ext-navbar-logo {
+        margin-left: var(--logo-margin-left);
+        height: auto;
+        max-height: var(--logo-height);
+        width: auto;
+        padding-top: var(--logo-padding-top);
+    }
+    
+    /* Theme-aware logo text color */
+    .ext-navbar-logo .logo-text {
+        fill: var(--heading-color);
+    }
+    
+    .ext-navbar-title {
+        color: var(--heading-color) !important;
+        font-size: var(--turing-title-font-size) !important;
+        margin-left: var(--title-margin-left);
+        text-decoration: none;
+        transition: color 0.2s ease;
+    }
+    
+    .ext-navbar-title:hover {
+        color: var(--hover-color) !important;
+    }
+
+    .ext-nav-links {
+        display: flex;
+        align-items: center;
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        flex-grow: 1;
+        margin-left: var(--title-nav-spacing);
+    }
+
+    .ext-nav-links li:first-child {
+        margin-left: 0 !important;
+    }
+
+    .ext-nav-links li {
+        margin-left: var(--nav-item-margin-left) !important;
+    }
+
+    .ext-nav-link {
+        color: var(--heading-color) !important;
+        text-decoration: none;
+        font-size: var(--nav-link-font-size) !important;
+        transition: color 0.2s ease;
+        cursor: pointer;
+    }
+
+    .ext-nav-link:hover,
+    .ext-navbar-item-single a:hover,
+    .ext-navbar-icons a:hover {
+        color: var(--hover-color) !important;
+    }
+
+    .ext-navbar-item-single a {
+        color: var(--heading-color) !important;
+    }
+    
+    .ext-navbar-icons {
+        display: flex;
+        align-items: center;
+    }
+
+    .ext-navbar-icons a {
+        color: var(--icon-color) !important;
+        font-size: var(--icon-font-size) !important;
+        transition: color 0.2s ease;
+        margin-left: var(--icon-margin-left);
+    }
+
+    .ext-menu-toggle {
+        display: none;
+        font-size: 1.5rem;
+        color: var(--heading-color);
+        cursor: pointer;
+    }
+
+    .ext-dropdown {
+        display: none;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        padding: var(--dropdown-padding);
+        position: absolute;
+        top: var(--navbar-height);
+        width: 100%;
+        left: 0;
+        background-color: var(--primary-bg);
+        line-height: 1.875rem;
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out, background-color 0.3s;
+        transform: translateY(-0.625rem);
+        box-shadow: 0 4px 6px var(--shadow-color);
+    }
+
+    #library-handler::after {
+        content: "▼";
+        font-size: var(--dropdown-arrow-font-size);
+        margin-left: 0.3125rem;
+        transition: transform 0.3s ease-in-out;
+    }
+
+    #library-handler.open::after {
+        content: "▲";
+    }
+
+    .ext-dropdown.show {
+        display: grid;
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .ext-dropdown ul {
+        width: var(--dropdown-item-width);
+        margin-bottom: 1.25rem;
+    }
+
+    .ext-dropdown ul li {
+        text-align: left;
+        display: flex;
+        align-items: center;
+    }
+
+    .ext-dropdown ul a li {
+        color: var(--item-color);
+        width: var(--dropdown-subitem-width);
+        border-radius: 3px;
+        padding: var(--dropdown-subitem-padding);
+        transition: background-color 0.2s ease;
+    }
+
+    .ext-dropdown ul a li:hover {
+        background-color: var(--dropdown-hover-bg);
+    }
+
+    .ext-dropdown-item-heading {
+        color: var(--heading-color);
+        text-align: center;
+    }
+
+    .deprecated-badge {
+        background-color: var(--deprecated-bg);
+        color: var(--deprecated-text);
+        font-size: var(--badge-font-size);
+        padding: .1rem;
+        border-radius: 3px;
+        margin-left: 0.5rem;
+        line-height: 1;
+    }
+
+    @media (max-width: 966px) {
+        .ext-dropdown {
+            grid-template-columns: 1fr 1fr 1fr;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .ext-nav-links {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            background-color: var(--primary-bg);
+            position: absolute;
+            top: var(--navbar-height);
+            left: 0;
+            padding: 0.625rem 0;
+            height: auto;
+            overflow-y: auto;
+            box-shadow: 0 4px 6px var(--shadow-color);
+            margin-left: 0;
+        }
+
+        .ext-nav-links.show {
+            display: flex;
+        }
+
+        .ext-nav-links li {
+            margin: 0.625rem 0 !important;
+            text-align: center;
+        }
+        
+        .ext-menu-toggle {
+            display: block;
+            margin-left: auto;
+        }
+
+        .ext-navigation.hide {
+            transform: translateY(calc(-1 * var(--navbar-height)));
+        }
+
+        .ext-dropdown {
+            position: static;
+            display: block;
+            opacity: 1;
+            transform: none;
+            box-shadow: none;
+            grid-template-columns: 1fr;
+            padding: 0.625rem;
+            text-align: center;
+        }
+
+        .ext-dropdown ul {
+            width: auto;
+            display: inline-block;
+            margin: 0 auto 0.3125rem;
+            text-align: left;
+        }
+    }
+</style>
+<nav class="ext-navigation">
+    <a title="TuringLang" href="https://turinglang.org/">
+        <svg width="4333" height="1145" viewBox="0 0 4333 1145" fill="none" xmlns="http://www.w3.org/2000/svg" class="ext-navbar-logo">
+            <path class="logo-text" d="M0.44603 193.181V66.9868H663.471V193.181H406.62V898H257.297V193.181H0.44603ZM1097.24 635.874V274.74H1244.13V898H1101.7V787.225H1095.21C1081.14 822.121 1058.01 850.66 1025.82 872.842C993.902 895.024 954.542 906.115 907.744 906.115C866.896 906.115 830.783 897.053 799.403 878.929C768.295 860.534 743.948 833.889 726.365 798.993C708.782 763.826 699.99 721.356 699.99 671.581V274.74H846.878V648.858C846.878 688.353 857.699 719.733 879.34 742.997C900.981 766.261 929.385 777.893 964.551 777.893C986.192 777.893 1007.16 772.618 1027.45 762.068C1047.73 751.518 1064.37 735.828 1077.35 714.999C1090.61 693.899 1097.24 667.524 1097.24 635.874ZM1395.17 898V274.74H1537.6V378.617H1544.09C1555.45 342.639 1574.93 314.911 1602.52 295.434C1630.38 275.687 1662.17 265.813 1697.88 265.813C1705.99 265.813 1715.05 266.219 1725.06 267.031C1735.34 267.572 1743.86 268.518 1750.63 269.871V404.992C1744.4 402.828 1734.53 400.934 1721 399.311C1707.75 397.417 1694.9 396.471 1682.46 396.471C1655.68 396.471 1631.6 402.287 1610.23 413.919C1589.13 425.28 1572.49 441.105 1560.32 461.393C1548.15 481.682 1542.06 505.081 1542.06 531.591V898H1395.17ZM1848.21 898V274.74H1995.1V898H1848.21ZM1922.06 186.283C1898.8 186.283 1878.78 178.573 1862.01 163.154C1845.24 147.464 1836.85 128.664 1836.85 106.752C1836.85 84.5701 1845.24 65.7695 1862.01 50.3503C1878.78 34.6606 1898.8 26.8158 1922.06 26.8158C1945.6 26.8158 1965.61 34.6606 1982.12 50.3503C1998.89 65.7695 2007.27 84.5701 2007.27 106.752C2007.27 128.664 1998.89 147.464 1982.12 163.154C1965.61 178.573 1945.6 186.283 1922.06 186.283ZM2293.04 532.809V898H2146.15V274.74H2286.54V380.646H2293.85C2308.18 345.75 2331.04 318.022 2362.42 297.463C2394.07 276.904 2433.16 266.625 2479.69 266.625C2522.7 266.625 2560.17 275.822 2592.09 294.217C2624.28 312.612 2649.17 339.257 2666.75 374.153C2684.6 409.049 2693.39 451.385 2693.12 501.159V898H2546.24V523.882C2546.24 482.223 2535.41 449.626 2513.77 426.092C2492.4 402.557 2462.78 390.79 2424.91 390.79C2399.21 390.79 2376.35 396.471 2356.34 407.832C2336.59 418.923 2321.03 435.019 2309.67 456.119C2298.58 477.218 2293.04 502.782 2293.04 532.809ZM3113.5 1144.71C3060.75 1144.71 3015.44 1137.54 2977.57 1123.2C2939.7 1109.13 2909.26 1090.2 2886.27 1066.39C2863.28 1042.59 2847.32 1016.21 2838.39 987.269L2970.67 955.213C2976.62 967.386 2985.28 979.424 2996.64 991.327C3008 1003.5 3023.28 1013.51 3042.49 1021.35C3061.97 1029.47 3086.45 1033.53 3115.93 1033.53C3157.59 1033.53 3192.08 1023.38 3219.4 1003.09C3246.73 983.076 3260.39 950.074 3260.39 904.087V786.008H3253.08C3245.51 801.157 3234.42 816.711 3219.81 832.671C3205.47 848.632 3186.4 862.022 3162.6 872.842C3139.06 883.663 3109.44 889.073 3073.73 889.073C3025.85 889.073 2982.44 877.847 2943.48 855.394C2904.8 832.671 2873.96 798.857 2850.97 753.952C2828.24 708.777 2816.88 652.24 2816.88 584.341C2816.88 515.902 2828.24 458.147 2850.97 411.078C2873.96 363.739 2904.93 327.896 2943.89 303.55C2982.84 278.933 3026.26 266.625 3074.14 266.625C3110.66 266.625 3140.69 272.847 3164.22 285.29C3188.03 297.463 3206.96 312.206 3221.03 329.519C3235.09 346.561 3245.78 362.657 3253.08 377.805H3261.2V274.74H3406.06V908.144C3406.06 961.435 3393.34 1005.53 3367.92 1040.42C3342.49 1075.32 3307.73 1101.43 3263.63 1118.74C3219.54 1136.05 3169.5 1144.71 3113.5 1144.71ZM3114.72 773.835C3145.83 773.835 3172.34 766.261 3194.25 751.112C3216.16 735.963 3232.79 714.187 3244.16 685.783C3255.52 657.379 3261.2 623.295 3261.2 583.53C3261.2 544.305 3255.52 509.95 3244.16 480.465C3233.07 450.979 3216.56 428.12 3194.65 411.89C3173.01 395.389 3146.37 387.138 3114.72 387.138C3081.98 387.138 3054.66 395.659 3032.75 412.701C3010.84 429.744 2994.34 453.143 2983.25 482.899C2972.16 512.385 2966.61 545.929 2966.61 583.53C2966.61 621.672 2972.16 655.08 2983.25 683.754C2994.61 712.158 3011.25 734.34 3033.16 750.3C3055.34 765.99 3082.53 773.835 3114.72 773.835ZM3647.08 906.927C3622.47 906.927 3601.37 898.271 3583.78 880.958C3566.2 863.645 3557.54 842.545 3557.82 817.658C3557.54 793.312 3566.2 772.482 3583.78 755.17C3601.37 737.857 3622.47 729.2 3647.08 729.2C3670.89 729.2 3691.58 737.857 3709.17 755.17C3727.02 772.482 3736.08 793.312 3736.35 817.658C3736.08 834.159 3731.75 849.173 3723.37 862.698C3715.25 876.224 3704.43 887.044 3690.91 895.16C3677.65 903.004 3663.04 906.927 3647.08 906.927ZM3888.01 274.74H4034.9V933.708C4034.9 978.613 4026.38 1015.67 4009.33 1044.89C3992.29 1074.1 3967.67 1095.88 3935.48 1110.22C3903.29 1124.55 3864.2 1131.72 3818.22 1131.72C3812.81 1131.72 3807.8 1131.59 3803.2 1131.32C3798.6 1131.32 3793.6 1131.18 3788.19 1130.91V1011.21C3792.25 1011.48 3795.9 1011.62 3799.15 1011.62C3802.39 1011.89 3805.77 1012.02 3809.29 1012.02C3837.42 1012.02 3857.58 1005.12 3869.75 991.327C3881.92 977.801 3888.01 957.918 3888.01 931.679V274.74ZM3961.05 186.283C3937.51 186.283 3917.36 178.573 3900.59 163.154C3884.09 147.464 3875.84 128.664 3875.84 106.752C3875.84 84.5701 3884.09 65.7695 3900.59 50.3503C3917.36 34.6606 3937.51 26.8158 3961.05 26.8158C3984.31 26.8158 4004.19 34.6606 4020.7 50.3503C4037.47 65.7695 4045.85 84.5701 4045.85 106.752C4045.85 128.664 4037.47 147.464 4020.7 163.154C4004.19 178.573 3984.31 186.283 3961.05 186.283ZM4332.83 66.9868V898H4185.94V66.9868H4332.83Z" fill="currentColor"/>
+            <path d="M4076 108.5C4076 168.424 4027.42 217 3967.5 217C3907.58 217 3859 168.424 3859 108.5C3859 48.5762 3907.58 0 3967.5 0C4027.42 0 4076 48.5762 4076 108.5Z" fill="#389725"/>
+            <path d="M3755 814.5C3755 874.424 3706.42 923 3646.5 923C3586.58 923 3538 874.424 3538 814.5C3538 754.576 3586.58 706 3646.5 706C3706.42 706 3755 754.576 3755 814.5Z" fill="#9457B1"/>
+            <path d="M2030 108.5C2030 168.424 1981.42 217 1921.5 217C1861.58 217 1813 168.424 1813 108.5C1813 48.5762 1861.58 0 1921.5 0C1981.42 0 2030 48.5762 2030 108.5Z" fill="#CA3B33"/>
+        </svg>
+    </a>
+    <!-- <a class="ext-navbar-title" href="https://turinglang.org/">Turing.jl</a> -->
+    
+    <ul class="ext-nav-links">
+        <li><a class="ext-nav-link" href="https://turinglang.org/docs/getting-started/">Get Started</a></li>
+        <li><a class="ext-nav-link" href="https://turinglang.org/docs/tutorials/">Tutorials</a></li>
+        <li><a class="ext-nav-link" href="https://turinglang.org/docs/faq/">FAQ</a></li>
+        <li>
+            <p class="ext-nav-link" id="library-handler">Libraries</p>
+            <div class="ext-dropdown" id="ext-dropdown-items">
+                <ul>
+                    <li class="ext-dropdown-item-heading">Modelling Languages</li>
+                    <a href="https://turinglang.org/DynamicPPL.jl/"><li>DynamicPPL</li></a>
+                    <a href="https://turinglang.org/JuliaBUGS.jl/"><li>JuliaBUGS</li></a>
+                    <a href="https://turinglang.org/TuringGLM.jl/"><li>TuringGLM</li></a>
+                </ul>
+                <ul>
+                    <li class="ext-dropdown-item-heading">MCMC</li>
+                    <a href="https://turinglang.org/AdvancedHMC.jl/"><li>AdvancedHMC</li></a>
+                    <a href="https://turinglang.org/AbstractMCMC.jl/"><li>AbstractMCMC</li></a>
+                    <a href="https://github.com/theogf/ThermodynamicIntegration.jl"><li>ThermodynamicIntegration</li></a>
+                    <a href="https://turinglang.org/AdvancedPS.jl/"><li>AdvancedPS</li></a>
+                    <a href="https://turinglang.org/SliceSampling.jl/"><li>SliceSampling</li></a>
+                    <a href="https://turinglang.org/EllipticalSliceSampling.jl/"><li>EllipticalSliceSampling</li></a>
+                </ul>
+                <ul>
+                    <li class="ext-dropdown-item-heading">Diagnostics</li>
+                    <a href="https://turinglang.org/MCMCChains.jl/"><li>MCMCChains</li></a>
+                    <a href="https://turinglang.org/MCMCDiagnosticTools.jl/"><li>MCMCDiagnosticTools</li></a>
+                    <a href="https://chalk-lab.github.io/ParetoSmooth.jl/"><li>ParetoSmooth</li></a>
+                </ul>
+                <ul>
+                    <li class="ext-dropdown-item-heading">Gaussian Processes</li>
+                    <a href="https://juliagaussianprocesses.github.io/AbstractGPs.jl/"><li>AbstractGPs</li></a>
+                    <a href="https://juliagaussianprocesses.github.io/KernelFunctions.jl/"><li>KernelFunctions</li></a>
+                    <a href="https://juliagaussianprocesses.github.io/ApproximateGPs.jl/"><li>ApproximateGPs</li></a>
+                </ul>
+                <ul><li class="ext-dropdown-item-heading ext-navbar-item-single"><a href="https://turinglang.org/Bijectors.jl/">Bijectors</a></li></ul>
+                <ul><li class="ext-dropdown-item-heading ext-navbar-item-single"><a href="https://turinglang.org/TuringCallbacks.jl/">TuringCallbacks</a></li></ul>
+                <ul><li class="ext-dropdown-item-heading ext-navbar-item-single"><a href="https://turinglang.org/Deprecated/TuringBenchmarking/">TuringBenchmarking</a><span class="deprecated-badge">Deprecated</span></li></ul>
+            </div>
+        </li>
+        <li><a class="ext-nav-link" href="https://turinglang.org/news/">News</a></li>
+        <li><a class="ext-nav-link" href="https://turinglang.org/team/">Team</a></li>
+    </ul>
+
+    <div class="ext-navbar-icons">
+        <a href="https://x.com/TuringLang" aria-label="Turing on X"><i class="fa-brands fa-x-twitter"></i></a>
+        <a href="https://discourse.julialang.org/c/domain/probprog/48" aria-label="Turing on Discourse"><i class="fa-brands fa-discourse"></i></a>
+        <a href="https://julialang.slack.com/archives/CCYDC34A0" aria-label="Turing on Slack"><i class="fa-brands fa-slack"></i></a>
+        <a href="https://github.com/TuringLang/" aria-label="Turing.jl on GitHub"><i class="fa-brands fa-github"></i></a>
+    </div>
+
+    <span class="ext-menu-toggle"><i class="fa-solid fa-bars"></i></span>
+</nav>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const menuToggle = document.querySelector(".ext-menu-toggle");
+        const navLinks = document.querySelector(".ext-nav-links");
+        const nav = document.querySelector(".ext-navigation");
+        const libraryHandler = document.getElementById("library-handler");
+        const dropdownContainer = document.getElementById("ext-dropdown-items");
+        let lastScrollY = window.scrollY;
+
+        function closeDropdown() {
+            if (dropdownContainer.classList.contains("show")) {
+                libraryHandler.classList.remove("open");
+                dropdownContainer.classList.remove("show");
+                setTimeout(() => {
+                    if (!dropdownContainer.classList.contains("show")) {
+                        dropdownContainer.style.display = "none";
+                    }
+                }, 300);
+            }
+        }
+
+        function openDropdown() {
+            dropdownContainer.style.display = "grid";
+            libraryHandler.classList.add("open");
+            setTimeout(() => {
+                dropdownContainer.classList.add("show");
+            }, 10);
+        }
+
+        function setAppropriateHeight() {
+            if (window.innerWidth <= 768) {
+                const viewportHeight = window.innerHeight;
+                const navHeight = nav.offsetHeight;
+                navLinks.style.maxHeight = `${viewportHeight - navHeight}px`;
+                navLinks.style.overflowY = "auto";
+            } else {
+                navLinks.style.maxHeight = "";
+                navLinks.style.overflowY = "";
+            }
+        }
+
+        menuToggle.addEventListener("click", (event) => {
+            event.stopPropagation();
+            navLinks.classList.toggle("show");
+            if (navLinks.classList.contains("show")) {
+                setAppropriateHeight();
+                closeDropdown();
+                dropdownContainer.style.display = "none";
+            }
+        });
+
+        libraryHandler.addEventListener("click", (event) => {
+            event.stopPropagation();
+            event.preventDefault();
+            if (dropdownContainer.classList.contains("show")) {
+                closeDropdown();
+            } else {
+                openDropdown();
+            }
+            setAppropriateHeight();
+        });
+
+        // Close all menus if a click is registered outside the navigation bar.
+        document.addEventListener("click", (event) => {
+            if (!nav.contains(event.target)) {
+                navLinks.classList.remove("show");
+                closeDropdown();
+            }
+        });
+
+        // Hide navigation bar on scroll down in mobile view.
+        window.addEventListener("scroll", () => {
+            if (window.innerWidth <= 768) {
+                if (window.scrollY > lastScrollY && window.scrollY > nav.offsetHeight){
+                    nav.classList.add("hide");
+                } else {
+                    nav.classList.remove("hide");
+                }
+                lastScrollY = window.scrollY;
+            }
+        });
+
+        window.addEventListener("resize", setAppropriateHeight);
+    });
+</script>
+<!-- NAVBAR END -->
+
+
+<div id="documenter"><nav class="docs-sidebar"><div class="docs-package-name"><span class="docs-autofit"><a href="../">NestedSamplers.jl</a></span></div><button class="docs-search-query input is-rounded is-small is-clickable my-2 mx-auto py-1 px-2" id="documenter-search-query">Search docs (Ctrl + /)</button><ul class="docs-menu"><li><a class="tocitem" href="../">Home</a></li><li><span class="tocitem">Examples</span><ul><li><a class="tocitem" href="../examples/shells/">Gaussian Shells</a></li><li><a class="tocitem" href="../examples/correlated/">Correlated Gaussian</a></li><li><a class="tocitem" href="../examples/eggbox/">Eggbox</a></li></ul></li><li><a class="tocitem" href="../benchmarks/">Benchmarks</a></li><li class="is-active"><a class="tocitem" href>API/Reference</a><ul class="internal"><li><a class="tocitem" href="#Samplers"><span>Samplers</span></a></li><li><a class="tocitem" href="#Bounds"><span>Bounds</span></a></li><li><a class="tocitem" href="#Proposals"><span>Proposals</span></a></li><li><a class="tocitem" href="#Models"><span>Models</span></a></li></ul></li></ul><div class="docs-version-selector field has-addons"><div class="control"><span class="docs-label button is-static is-size-7">Version</span></div><div class="docs-selector control is-expanded"><div class="select is-fullwidth is-size-7"><select id="documenter-version-selector"></select></div></div></div></nav><div class="docs-main"><header class="docs-navbar"><a class="docs-sidebar-button docs-navbar-link fa-solid fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a><nav class="breadcrumb"><ul class="is-hidden-mobile"><li class="is-active"><a href>API/Reference</a></li></ul><ul class="is-hidden-tablet"><li class="is-active"><a href>API/Reference</a></li></ul></nav><div class="docs-right"><a class="docs-navbar-link" href="https://github.com/chalk-lab/NestedSamplers.jl" title="View the repository on GitHub"><span class="docs-icon fa-brands"></span><span class="docs-label is-hidden-touch">GitHub</span></a><a class="docs-navbar-link" href="https://github.com/chalk-lab/NestedSamplers.jl/blob/main/docs/src/api.md" title="Edit source on GitHub"><span class="docs-icon fa-solid"></span></a><a class="docs-settings-button docs-navbar-link fa-solid fa-gear" id="documenter-settings-button" href="#" title="Settings"></a><a class="docs-article-toggle-button fa-solid fa-chevron-up" id="documenter-article-toggle-button" href="javascript:;" title="Collapse all docstrings"></a></div></header><article class="content" id="documenter-page"><h1 id="API/Reference"><a class="docs-heading-anchor" href="#API/Reference">API/Reference</a><a id="API/Reference-1"></a><a class="docs-heading-anchor-permalink" href="#API/Reference" title="Permalink"></a></h1><ul><li><a href="#NestedSamplers.Bounds"><code>NestedSamplers.Bounds</code></a></li><li><a href="#NestedSamplers.Models"><code>NestedSamplers.Models</code></a></li><li><a href="#NestedSamplers.Proposals"><code>NestedSamplers.Proposals</code></a></li><li><a href="#NestedSamplers.Bounds.AbstractBoundingSpace"><code>NestedSamplers.Bounds.AbstractBoundingSpace</code></a></li><li><a href="#NestedSamplers.Bounds.Ellipsoid"><code>NestedSamplers.Bounds.Ellipsoid</code></a></li><li><a href="#NestedSamplers.Bounds.MultiEllipsoid"><code>NestedSamplers.Bounds.MultiEllipsoid</code></a></li><li><a href="#NestedSamplers.Bounds.NoBounds"><code>NestedSamplers.Bounds.NoBounds</code></a></li><li><a href="#NestedSamplers.Nested"><code>NestedSamplers.Nested</code></a></li><li><a href="#NestedSamplers.NestedModel"><code>NestedSamplers.NestedModel</code></a></li><li><a href="#NestedSamplers.Proposals.AbstractProposal"><code>NestedSamplers.Proposals.AbstractProposal</code></a></li><li><a href="#NestedSamplers.Proposals.RSlice"><code>NestedSamplers.Proposals.RSlice</code></a></li><li><a href="#NestedSamplers.Proposals.RStagger"><code>NestedSamplers.Proposals.RStagger</code></a></li><li><a href="#NestedSamplers.Proposals.RWalk"><code>NestedSamplers.Proposals.RWalk</code></a></li><li><a href="#NestedSamplers.Proposals.Rejection"><code>NestedSamplers.Proposals.Rejection</code></a></li><li><a href="#NestedSamplers.Proposals.Slice"><code>NestedSamplers.Proposals.Slice</code></a></li><li><a href="#NestedSamplers.Bounds.rand_live"><code>NestedSamplers.Bounds.rand_live</code></a></li><li><a href="#NestedSamplers.Models.CorrelatedGaussian"><code>NestedSamplers.Models.CorrelatedGaussian</code></a></li><li><a href="#NestedSamplers.Models.Eggbox"><code>NestedSamplers.Models.Eggbox</code></a></li><li><a href="#NestedSamplers.Models.GaussianShells"><code>NestedSamplers.Models.GaussianShells</code></a></li></ul><h2 id="Samplers"><a class="docs-heading-anchor" href="#Samplers">Samplers</a><a id="Samplers-1"></a><a class="docs-heading-anchor-permalink" href="#Samplers" title="Permalink"></a></h2><article><details class="docstring" open="true"><summary id="NestedSamplers.NestedModel"><a class="docstring-binding" href="#NestedSamplers.NestedModel"><code>NestedSamplers.NestedModel</code></a> — <span class="docstring-category">Type</span></summary><section><div><pre><code class="language-julia hljs">NestedModel(loglike, prior_transform)
+NestedModel(loglike, priors::AbstractVector{&lt;:Distribution})</code></pre><p><code>loglike</code> must be callable with a signature <code>loglike(::AbstractVector)</code> where the length of the vector must match the number of parameters in your model.</p><p><code>prior_transform</code> must be a callable with a signature <code>prior_transform(::AbstractVector)</code> that returns the transformation from the unit-cube to parameter space. This is effectively the quantile or ppf of a statistical distribution. For convenience, if a vector of <code>Distribution</code> is provided (as a set of priors), a transformation function will automatically be constructed using <code>Distributions.quantile</code>.</p><p><strong>Note:</strong> <code>loglike</code> is the only function used for likelihood calculations. This means if you want your priors to be used for the likelihood calculations they must be manually included in the <code>loglike</code> function.</p></div><a class="docs-sourcelink" target="_blank" href="https://github.com/chalk-lab/NestedSamplers.jl/blob/735997445bec2c2068bb56899743563739bb9a5c/src/model.jl#L17-L27">source</a></section></details></article><article><details class="docstring" open="true"><summary id="NestedSamplers.Nested"><a class="docstring-binding" href="#NestedSamplers.Nested"><code>NestedSamplers.Nested</code></a> — <span class="docstring-category">Type</span></summary><section><div><pre><code class="language-julia hljs">Nested(ndims, nactive;
+    bounds=Bounds.MultiEllipsoid,
+    proposal=:auto,
+    enlarge=1.25,
+    update_interval=default_update_interval(proposal, ndims),
+    min_ncall=2nactive,
+    min_eff=0.10)</code></pre><p>Static nested sampler with <code>nactive</code> active points and <code>ndims</code> parameters.</p><p><code>ndims</code> is equivalent to the number of parameters to fit, which defines the dimensionality of the prior volume used in evidence sampling. <code>nactive</code> is the number of live or active points in the prior volume. This is a static sampler, so the number of live points will be constant for all of the sampling.</p><p><strong>Bounds and Proposals</strong></p><p><code>bounds</code> declares the Type of <a href="#NestedSamplers.Bounds.AbstractBoundingSpace"><code>Bounds.AbstractBoundingSpace</code></a> to use in the prior volume. The available bounds are described by <a href="#Bounds"><code>Bounds</code></a>. <code>proposal</code> declares the algorithm used for proposing new points. The available proposals are described in <a href="#Proposals"><code>Proposals</code></a>. If <code>proposal</code> is <code>:auto</code>, will choose the proposal based on <code>ndims</code></p><ul><li><code>ndims &lt; 10</code> - <a href="#NestedSamplers.Proposals.Rejection"><code>Proposals.Rejection</code></a></li><li><code>10 ≤ ndims ≤ 20</code> - <a href="#NestedSamplers.Proposals.RWalk"><code>Proposals.RWalk</code></a></li><li><code>ndims &gt; 20</code> - <a href="#NestedSamplers.Proposals.Slice"><code>Proposals.Slice</code></a></li></ul><p>The original nested sampling algorithm is roughly equivalent to using <code>Bounds.Ellipsoid</code> with <code>Proposals.Rejection</code>. The MultiNest algorithm is roughly equivalent to <code>Bounds.MultiEllipsoid</code> with <code>Proposals.Rejection</code>. The PolyChord algorithm is roughly equivalent to using <code>Proposals.RSlice</code>.</p><p><strong>Other Parameters</strong></p><ul><li><code>enlarge</code> - When fitting the bounds to live points, they will be enlarged (in terms of volume) by this linear factor.</li><li><code>update_interval</code> - How often to refit the live points with the bounds as a fraction of <code>nactive</code>. By default this will be determined using <code>default_update_interval</code> for the given proposal<ul><li><code>Proposals.Rejection</code> - <code>1.5</code></li><li><code>Proposals.RWalk</code> and <code>Proposals.RStagger</code> - <code>0.15 * walks</code></li><li><code>Proposals.Slice</code> - <code>0.9 * ndims * slices</code></li><li><code>Proposals.RSlice</code> - <code>2 * slices</code></li></ul></li><li><code>min_ncall</code>: The minimum number of iterations before fitting the first bound; used to </li></ul><p>avoid shrinking the bounds before burn-in is completed. By default 2*<code>nactive</code>.</p><ul><li><code>min_eff</code>: Minimum efficiency <code>(samples accepted / samples generated)</code> before fitting the </li></ul><p>first bound; used to avoid shrinking the bounds before burn-in is completed By default 0.1.</p></div><a class="docs-sourcelink" target="_blank" href="https://github.com/chalk-lab/NestedSamplers.jl/blob/735997445bec2c2068bb56899743563739bb9a5c/src/staticsampler.jl#L15-L48">source</a></section></details></article><h3 id="Convergence"><a class="docs-heading-anchor" href="#Convergence">Convergence</a><a id="Convergence-1"></a><a class="docs-heading-anchor-permalink" href="#Convergence" title="Permalink"></a></h3><p>There are a few convergence criteria available, by default the <code>dlogz</code> criterion will be used.</p><ul><li><code>dlogz=0.5</code> sample until the <em>fraction of the remaining evidence</em> is below the given value (<a href="https://dynesty.readthedocs.io/en/latest/overview.html#stopping-criteria">more info</a>).</li><li><code>maxiter=Inf</code> stop after the given number of iterations</li><li><code>maxcall=Inf</code> stop after the given number of  log-likelihood function calls</li><li><code>maxlogl=Inf</code> stop after reaching the target log-likelihood</li></ul><h2 id="Bounds"><a class="docs-heading-anchor" href="#Bounds">Bounds</a><a id="Bounds-1"></a><a class="docs-heading-anchor-permalink" href="#Bounds" title="Permalink"></a></h2><article><details class="docstring" open="true"><summary id="NestedSamplers.Bounds"><a class="docstring-binding" href="#NestedSamplers.Bounds"><code>NestedSamplers.Bounds</code></a> — <span class="docstring-category">Module</span></summary><section><div><pre><code class="language-julia hljs">NestedSamplers.Bounds</code></pre><p>This module contains the different algorithms for bounding the prior volume.</p><p>The available implementations are</p><ul><li><a href="#NestedSamplers.Bounds.NoBounds"><code>Bounds.NoBounds</code></a> - no bounds on the prior volume (equivalent to a unit cube)</li><li><a href="#NestedSamplers.Bounds.Ellipsoid"><code>Bounds.Ellipsoid</code></a> - bound using a single ellipsoid</li><li><a href="#NestedSamplers.Bounds.MultiEllipsoid"><code>Bounds.MultiEllipsoid</code></a> - bound using multiple ellipsoids in an optimal cluster</li></ul></div><a class="docs-sourcelink" target="_blank" href="https://github.com/chalk-lab/NestedSamplers.jl/blob/735997445bec2c2068bb56899743563739bb9a5c/src/bounds/Bounds.jl#L1-L10">source</a></section></details></article><article><details class="docstring" open="true"><summary id="NestedSamplers.Bounds.AbstractBoundingSpace"><a class="docstring-binding" href="#NestedSamplers.Bounds.AbstractBoundingSpace"><code>NestedSamplers.Bounds.AbstractBoundingSpace</code></a> — <span class="docstring-category">Type</span></summary><section><div><pre><code class="language-julia hljs">Bounds.AbstractBoundingSpace{T&lt;:Number}</code></pre><p>Abstract type for describing the bounding algorithms. For information about the interface, see the extended help (<code>??Bounds.AbstractBoundingSpace</code>)</p><p><strong>Extended Help</strong></p><p><strong>Interface</strong></p><p>The following functionality defines the interface for <code>AbstractBoundingSpace</code> for an example type <code>::MyBounds</code></p><table><tr><th style="text-align: right">Function</th><th style="text-align: center">Required</th><th style="text-align: left">Description</th></tr><tr><td style="text-align: right"><code>Base.rand(::AbstractRNG, ::MyBounds)</code></td><td style="text-align: center">x</td><td style="text-align: left">Sample a single point from the prior volume</td></tr><tr><td style="text-align: right"><code>Bounds.randoffset(::AbstractRNG, ::MyBounds)</code></td><td style="text-align: center"></td><td style="text-align: left">Get a random offset from the center of the bounds. Required for random walk schemes, although a fallback is provided.</td></tr><tr><td style="text-align: right"><code>Base.in(point, ::MyBounds)</code></td><td style="text-align: center">x</td><td style="text-align: left">Checks if the point is contained by the bounding space</td></tr><tr><td style="text-align: right"><code>Bounds.scale!(::MyBounds, factor)</code></td><td style="text-align: center">x</td><td style="text-align: left">Scale the volume by the linear <code>factor</code></td></tr><tr><td style="text-align: right"><code>Bounds.volume(::MyBounds)</code></td><td style="text-align: center"></td><td style="text-align: left">Retrieve the current prior volume occupied by the bounds.</td></tr><tr><td style="text-align: right"><code>Bounds.fit(::Type{&lt;:MyBounds}, points, pointvol=0)</code></td><td style="text-align: center">x</td><td style="text-align: left">update the bounds given the new <code>points</code> each with minimum volume <code>pointvol</code></td></tr><tr><td style="text-align: right"><code>Bounds.axes(::MyBounds)</code></td><td style="text-align: center"></td><td style="text-align: left">Used for transforming points from the unit cube to the encompassing bound. Worth storing as a property.</td></tr></table></div><a class="docs-sourcelink" target="_blank" href="https://github.com/chalk-lab/NestedSamplers.jl/blob/735997445bec2c2068bb56899743563739bb9a5c/src/bounds/Bounds.jl#L23-L43">source</a></section></details></article><article><details class="docstring" open="true"><summary id="NestedSamplers.Bounds.NoBounds"><a class="docstring-binding" href="#NestedSamplers.Bounds.NoBounds"><code>NestedSamplers.Bounds.NoBounds</code></a> — <span class="docstring-category">Type</span></summary><section><div><pre><code class="language-julia hljs">Bounds.NoBounds([T=Float64], N)</code></pre><p>Unbounded prior volume; equivalent to the unit cube in <code>N</code> dimensions. This matches the original nested sampling derivation in Skilling (2004).<sup class="footnote-reference"><a id="citeref-1" href="#footnote-1" class="footnote-ref">[1]</a><span class="footnote-preview" id="fn-1"></span></sup></p></div><a class="docs-sourcelink" target="_blank" href="https://github.com/chalk-lab/NestedSamplers.jl/blob/735997445bec2c2068bb56899743563739bb9a5c/src/bounds/Bounds.jl#L77-L83">source</a></section></details></article><article><details class="docstring" open="true"><summary id="NestedSamplers.Bounds.Ellipsoid"><a class="docstring-binding" href="#NestedSamplers.Bounds.Ellipsoid"><code>NestedSamplers.Bounds.Ellipsoid</code></a> — <span class="docstring-category">Type</span></summary><section><div><pre><code class="language-julia hljs">Bounds.Ellipsoid([T=Float64], N)
+Bounds.Ellipsoid(center::AbstractVector, A::AbstractMatrix)</code></pre><p>An <code>N</code>-dimensional ellipsoid defined by</p><p class="math-container">\[(x - center)^T A (x - center) = 1\]</p><p>where <code>size(center) == (N,)</code> and <code>size(A) == (N,N)</code>.</p><p>This implementation follows the algorithm presented in Mukherjee et al. (2006).<sup class="footnote-reference"><a id="citeref-2" href="#footnote-2" class="footnote-ref">[2]</a><span class="footnote-preview" id="fn-2"></span></sup></p></div><a class="docs-sourcelink" target="_blank" href="https://github.com/chalk-lab/NestedSamplers.jl/blob/735997445bec2c2068bb56899743563739bb9a5c/src/bounds/ellipsoid.jl#L1-L16">source</a></section></details></article><article><details class="docstring" open="true"><summary id="NestedSamplers.Bounds.MultiEllipsoid"><a class="docstring-binding" href="#NestedSamplers.Bounds.MultiEllipsoid"><code>NestedSamplers.Bounds.MultiEllipsoid</code></a> — <span class="docstring-category">Type</span></summary><section><div><pre><code class="language-julia hljs">Bounds.MultiEllipsoid([T=Float64], ndims)
+Bounds.MultiEllipsoid(::AbstractVector{Ellipsoid})</code></pre><p>Use multiple <a href="#NestedSamplers.Bounds.Ellipsoid"><code>Ellipsoid</code></a>s in an optimal clustering to bound prior space. This implementation follows the MultiNest implementation outlined in Feroz et al. (2008,2009).<sup class="footnote-reference"><a id="citeref-3" href="#footnote-3" class="footnote-ref">[3]</a><span class="footnote-preview" id="fn-3"></span></sup><sup class="footnote-reference"><a id="citeref-4" href="#footnote-4" class="footnote-ref">[4]</a><span class="footnote-preview" id="fn-4"></span></sup> For more details about the bounding algorithm, see the extended help (<code>??Bounds.MultiEllipsoid</code>)</p><p><strong>Extended help</strong></p><p>The multiple-ellipsoidal implementation is defined as follows:</p><ol><li>Fit a <a href="#NestedSamplers.Bounds.Ellipsoid"><code>Bounds.Ellipsoid</code></a> to the sample.</li><li>Perform K-means clustering (here using <a href="https://github.com/JuliaStats/Clustering.jl">Clustering.jl</a>) centered at the endpoints of the bounding ellipsoid. This defines two clusters within the sample.</li><li>If either cluster has fewer than two points, consider it ill-defined and end any recursion.</li><li>Fit <a href="#NestedSamplers.Bounds.Ellipsoid"><code>Bounds.Ellipsoid</code></a> to each of the clusters assigned in (2).</li><li>If the volume of the parent ellipsoid is more than twice the volume of the two child ellipsoids, recurse (1-5) to each child.</li></ol><p>To sample from this distribution, a random ellipsoid is selected, and a random sample is sampled from that ellipsoid. We then reverse this and find all of the ellipsoids which enclose the sampled point, and select one of those randomly for the enclosing bound.</p></div><a class="docs-sourcelink" target="_blank" href="https://github.com/chalk-lab/NestedSamplers.jl/blob/735997445bec2c2068bb56899743563739bb9a5c/src/bounds/multiellipsoid.jl#L2-L22">source</a></section></details></article><article><details class="docstring" open="true"><summary id="NestedSamplers.Bounds.rand_live"><a class="docstring-binding" href="#NestedSamplers.Bounds.rand_live"><code>NestedSamplers.Bounds.rand_live</code></a> — <span class="docstring-category">Function</span></summary><section><div><pre><code class="language-julia hljs">rand_live([rng], ::AbstractBoundingSpace, us) -&gt; (u, bound)</code></pre><p>Returns a random live point and the bounds associated with it.</p></div><a class="docs-sourcelink" target="_blank" href="https://github.com/chalk-lab/NestedSamplers.jl/blob/735997445bec2c2068bb56899743563739bb9a5c/src/bounds/Bounds.jl#L56-L60">source</a></section><section><div><p>Returns a random live point and a bounding ellipsoid, since MultiEllipsoid doesn&#39;t have valid transformation axes</p></div><a class="docs-sourcelink" target="_blank" href="https://github.com/chalk-lab/NestedSamplers.jl/blob/735997445bec2c2068bb56899743563739bb9a5c/src/bounds/multiellipsoid.jl#L113-L116">source</a></section></details></article><h2 id="Proposals"><a class="docs-heading-anchor" href="#Proposals">Proposals</a><a id="Proposals-1"></a><a class="docs-heading-anchor-permalink" href="#Proposals" title="Permalink"></a></h2><article><details class="docstring" open="true"><summary id="NestedSamplers.Proposals"><a class="docstring-binding" href="#NestedSamplers.Proposals"><code>NestedSamplers.Proposals</code></a> — <span class="docstring-category">Module</span></summary><section><div><pre><code class="language-julia hljs">NestedSamplers.Proposals</code></pre><p>This module contains the different algorithms for proposing new points within a bounding volume in unit space.</p><p>The available implementations are</p><ul><li><a href="#NestedSamplers.Proposals.Rejection"><code>Proposals.Rejection</code></a> - samples uniformly within the bounding volume</li><li><a href="#NestedSamplers.Proposals.RWalk"><code>Proposals.RWalk</code></a> - random walks to a new point given an existing one</li><li><a href="#NestedSamplers.Proposals.RStagger"><code>Proposals.RStagger</code></a> - random staggering away to a new point given an existing one</li><li><a href="#NestedSamplers.Proposals.Slice"><code>Proposals.Slice</code></a> - slicing away to a new point given an existing one</li><li><a href="#NestedSamplers.Proposals.RSlice"><code>Proposals.RSlice</code></a> - random slicing away to a new point given an existing one</li></ul></div><a class="docs-sourcelink" target="_blank" href="https://github.com/chalk-lab/NestedSamplers.jl/blob/735997445bec2c2068bb56899743563739bb9a5c/src/proposals/Proposals.jl#L1-L12">source</a></section></details></article><article><details class="docstring" open="true"><summary id="NestedSamplers.Proposals.AbstractProposal"><a class="docstring-binding" href="#NestedSamplers.Proposals.AbstractProposal"><code>NestedSamplers.Proposals.AbstractProposal</code></a> — <span class="docstring-category">Type</span></summary><section><div><pre><code class="language-julia hljs">NestedSamplers.AbstractProposal</code></pre><p>The abstract type for live point proposal algorithms.</p><p><strong>Interface</strong></p><p>Each <code>AbstractProposal</code> must have this function, </p><pre><code class="language-julia hljs">(::AbstractProposal)(::AbstractRNG, point, loglstar, bounds, loglikelihood, prior_transform)</code></pre><p>which, given the input <code>point</code> with loglikelihood <code>loglstar</code> inside a <code>bounds</code>, returns a new point in unit space, prior space, the loglikelihood, and the number of function calls.</p></div><a class="docs-sourcelink" target="_blank" href="https://github.com/chalk-lab/NestedSamplers.jl/blob/735997445bec2c2068bb56899743563739bb9a5c/src/proposals/Proposals.jl#L24-L36">source</a></section></details></article><article><details class="docstring" open="true"><summary id="NestedSamplers.Proposals.Rejection"><a class="docstring-binding" href="#NestedSamplers.Proposals.Rejection"><code>NestedSamplers.Proposals.Rejection</code></a> — <span class="docstring-category">Type</span></summary><section><div><pre><code class="language-julia hljs">Proposals.Rejection(;maxiter=100_000)</code></pre><p>Propose a new live point by uniformly sampling within the bounding volume and rejecting samples that do not meet the likelihood constraints. This follows the original nested sampling algorithm proposed in Skilling (2004)<sup class="footnote-reference"><a id="citeref-1" href="#footnote-1" class="footnote-ref">[1]</a><span class="footnote-preview" id="fn-1"></span></sup></p><p><strong>Parameters</strong></p><ul><li><code>maxiter</code> is the maximum number of samples that can be rejected before giving up and throwing an error.</li></ul></div><a class="docs-sourcelink" target="_blank" href="https://github.com/chalk-lab/NestedSamplers.jl/blob/735997445bec2c2068bb56899743563739bb9a5c/src/proposals/Proposals.jl#L44-L53">source</a></section></details></article><article><details class="docstring" open="true"><summary id="NestedSamplers.Proposals.RWalk"><a class="docstring-binding" href="#NestedSamplers.Proposals.RWalk"><code>NestedSamplers.Proposals.RWalk</code></a> — <span class="docstring-category">Type</span></summary><section><div><pre><code class="language-julia hljs">Proposals.RWalk(;ratio=0.5, walks=25, scale=1)</code></pre><p>Propose a new live point by random walking away from an existing live point. This follows the algorithm outlined in Skilling (2006).<sup class="footnote-reference"><a id="citeref-5" href="#footnote-5" class="footnote-ref">[5]</a><span class="footnote-preview" id="fn-5"></span></sup></p><p><strong>Parameters</strong></p><ul><li><code>ratio</code> is the target acceptance ratio</li><li><code>walks</code> is the minimum number of steps to take</li><li><code>scale</code> is the proposal distribution scale, which will update <em>between</em> proposals.</li></ul></div><a class="docs-sourcelink" target="_blank" href="https://github.com/chalk-lab/NestedSamplers.jl/blob/735997445bec2c2068bb56899743563739bb9a5c/src/proposals/Proposals.jl#L81-L92">source</a></section></details></article><article><details class="docstring" open="true"><summary id="NestedSamplers.Proposals.RStagger"><a class="docstring-binding" href="#NestedSamplers.Proposals.RStagger"><code>NestedSamplers.Proposals.RStagger</code></a> — <span class="docstring-category">Type</span></summary><section><div><pre><code class="language-julia hljs">Proposals.RStagger(;ratio=0.5, walks=25, scale=1)</code></pre><p>Propose a new live point by random staggering away from an existing live point.  This differs from the random walk proposal in that the step size here is exponentially adjusted to reach a target acceptance rate <em>during</em> each proposal, in addition to <em>between</em> proposals. This follows the algorithm outlined in Skilling (2006).<sup class="footnote-reference"><a id="citeref-5" href="#footnote-5" class="footnote-ref">[5]</a><span class="footnote-preview" id="fn-5"></span></sup></p><p><strong>Parameters</strong></p><ul><li><code>ratio</code> is the target acceptance ratio</li><li><code>walks</code> is the minimum number of steps to take</li><li><code>scale</code> is the proposal distribution scale, which will update <em>between</em> proposals.</li></ul></div><a class="docs-sourcelink" target="_blank" href="https://github.com/chalk-lab/NestedSamplers.jl/blob/735997445bec2c2068bb56899743563739bb9a5c/src/proposals/Proposals.jl#L173-L187">source</a></section></details></article><article><details class="docstring" open="true"><summary id="NestedSamplers.Proposals.Slice"><a class="docstring-binding" href="#NestedSamplers.Proposals.Slice"><code>NestedSamplers.Proposals.Slice</code></a> — <span class="docstring-category">Type</span></summary><section><div><pre><code class="language-julia hljs">Proposals.Slice(;slices=5, scale=1)</code></pre><p>Propose a new live point by a series of random slices away from an existing live point. This is a standard <em>Gibbs-like</em> implementation where a single multivariate slice is a combination of <code>slices</code> univariate slices through each axis. This follows the algorithm outlined in Neal (2003).<sup class="footnote-reference"><a id="citeref-6" href="#footnote-6" class="footnote-ref">[6]</a><span class="footnote-preview" id="fn-6"></span></sup></p><p><strong>Parameters</strong></p><ul><li><code>slices</code> is the minimum number of slices</li><li><code>scale</code> is the proposal distribution scale, which will update <em>between</em> proposals.</li></ul></div><a class="docs-sourcelink" target="_blank" href="https://github.com/chalk-lab/NestedSamplers.jl/blob/735997445bec2c2068bb56899743563739bb9a5c/src/proposals/Proposals.jl#L268-L279">source</a></section></details></article><article><details class="docstring" open="true"><summary id="NestedSamplers.Proposals.RSlice"><a class="docstring-binding" href="#NestedSamplers.Proposals.RSlice"><code>NestedSamplers.Proposals.RSlice</code></a> — <span class="docstring-category">Type</span></summary><section><div><pre><code class="language-julia hljs">Proposals.RSlice(;slices=5, scale=1)</code></pre><p>Propose a new live point by a series of random slices away from an existing live point. This is a standard <em>random</em> implementation where each slice is along a random direction based on the provided axes. This more closely matches the PolyChord implementation outlined in Handley et al. (2015a,b).<sup class="footnote-reference"><a id="citeref-7" href="#footnote-7" class="footnote-ref">[7]</a><span class="footnote-preview" id="fn-7"></span></sup><sup class="footnote-reference"><a id="citeref-8" href="#footnote-8" class="footnote-ref">[8]</a><span class="footnote-preview" id="fn-8"></span></sup></p><p><strong>Parameters</strong></p><ul><li><code>slices</code> is the minimum number of slices</li><li><code>scale</code> is the proposal distribution scale, which will update <em>between</em> proposals.</li></ul></div><a class="docs-sourcelink" target="_blank" href="https://github.com/chalk-lab/NestedSamplers.jl/blob/735997445bec2c2068bb56899743563739bb9a5c/src/proposals/Proposals.jl#L330-L341">source</a></section></details></article><h2 id="Models"><a class="docs-heading-anchor" href="#Models">Models</a><a id="Models-1"></a><a class="docs-heading-anchor-permalink" href="#Models" title="Permalink"></a></h2><article><details class="docstring" open="true"><summary id="NestedSamplers.Models"><a class="docstring-binding" href="#NestedSamplers.Models"><code>NestedSamplers.Models</code></a> — <span class="docstring-category">Module</span></summary><section><div><p>This module contains various statistical models in the form of <a href="#NestedSamplers.NestedModel"><code>NestedModel</code></a>s. These models can be used for examples and for testing.</p><ul><li><a href="#NestedSamplers.Models.GaussianShells"><code>Models.GaussianShells</code></a></li><li><a href="#NestedSamplers.Models.CorrelatedGaussian"><code>Models.CorrelatedGaussian</code></a></li></ul></div><a class="docs-sourcelink" target="_blank" href="https://github.com/chalk-lab/NestedSamplers.jl/blob/735997445bec2c2068bb56899743563739bb9a5c/src/models/Models.jl#L1-L6">source</a></section></details></article><article><details class="docstring" open="true"><summary id="NestedSamplers.Models.GaussianShells"><a class="docstring-binding" href="#NestedSamplers.Models.GaussianShells"><code>NestedSamplers.Models.GaussianShells</code></a> — <span class="docstring-category">Function</span></summary><section><div><pre><code class="language-julia hljs">Models.GaussianShells()</code></pre><p>2-D Gaussian shells centered at <code>[-3.5, 0]</code> and <code>[3.5, 0]</code> with a radius of 2 and a shell width of 0.1</p><p><strong>Examples</strong></p><pre><code class="language-julia-repl hljs">julia&gt; model, lnZ = Models.GaussianShells();
+
+julia&gt; lnZ
+-1.75</code></pre></div><a class="docs-sourcelink" target="_blank" href="https://github.com/chalk-lab/NestedSamplers.jl/blob/735997445bec2c2068bb56899743563739bb9a5c/src/models/shells.jl#L1-L13">source</a></section></details></article><article><details class="docstring" open="true"><summary id="NestedSamplers.Models.CorrelatedGaussian"><a class="docstring-binding" href="#NestedSamplers.Models.CorrelatedGaussian"><code>NestedSamplers.Models.CorrelatedGaussian</code></a> — <span class="docstring-category">Function</span></summary><section><div><p>Models.CorrelatedGaussian(ndims)</p><p>Creates a highly-correlated Gaussian with the given dimensionality.</p><p class="math-container">\[\mathbf\theta \sim \mathcal{N}\left(2\mathbf{1}, \mathbf{I}\right)\]</p><p class="math-container">\[\Sigma_{ij} = \begin{cases} 1 &amp;\quad i=j \\ 0.95 &amp;\quad i\neq j \end{cases}\]</p><p class="math-container">\[\mathcal{L}(\mathbf\theta) = \mathcal{N}\left(\mathbf\theta | \mathbf{0}, \mathbf\Sigma \right)\]</p><p>the analytical evidence of the model is</p><p class="math-container">\[Z = \mathcal{N}\left(2\mathbf{1} | \mathbf{0}, \mathbf\Sigma + \mathbf{I} \right)\]</p><p><strong>Examples</strong></p><pre><code class="language-julia-repl hljs">julia&gt; model, lnZ = Models.CorrelatedGaussian(10);
+
+julia&gt; lnZ
+-12.482738597926607</code></pre></div><a class="docs-sourcelink" target="_blank" href="https://github.com/chalk-lab/NestedSamplers.jl/blob/735997445bec2c2068bb56899743563739bb9a5c/src/models/correlated.jl#L2-L30">source</a></section></details></article><article><details class="docstring" open="true"><summary id="NestedSamplers.Models.Eggbox"><a class="docstring-binding" href="#NestedSamplers.Models.Eggbox"><code>NestedSamplers.Models.Eggbox</code></a> — <span class="docstring-category">Function</span></summary><section><div><pre><code class="language-julia hljs">Models.Eggbox()</code></pre><p>Eggbox/Egg carton likelihood function</p><p class="math-container">\[z(x, y) = \left[a + \cos\frac{x}{b} \cdot \cos\frac{x}{b} \right]^5\]</p><p><strong>Examples</strong></p><pre><code class="language-julia-repl hljs">julia&gt; model, lnZ = Models.Eggbox();
+
+julia&gt; lnZ
+235.88</code></pre></div><a class="docs-sourcelink" target="_blank" href="https://github.com/chalk-lab/NestedSamplers.jl/blob/735997445bec2c2068bb56899743563739bb9a5c/src/models/eggbox.jl#L1-L17">source</a></section></details></article><section class="footnotes is-size-7"><ul><li class="footnote" id="footnote-1"><a class="tag is-link" href="#citeref-1">1</a>John Skilling, 2004, AIP 735, 395  <a href="https://aip.scitation.org/doi/abs/10.1063/1.1835238">&quot;Nested Sampling&quot;</a></li><li class="footnote" id="footnote-2"><a class="tag is-link" href="#citeref-2">2</a>Pia Mukherjee, et al., 2006, ApJ 638 L51 <a href="https://iopscience.iop.org/article/10.1086/501068">&quot;A Nested Sampling Algorithm for Cosmological Model Selection&quot;</a></li><li class="footnote" id="footnote-3"><a class="tag is-link" href="#citeref-3">3</a>Feroz and Hobson, 2008, MNRAS 384, 2 <a href="https://academic.oup.com/mnras/article/384/2/449/1023701">&quot;Multimodal nested sampling: an efficient and robust alternative to Markov Chain Monte Carlo methods for astronomical data analyses&quot;</a></li><li class="footnote" id="footnote-4"><a class="tag is-link" href="#citeref-4">4</a>Feroz et al., 2009, MNRAS 398, 4 <a href="https://academic.oup.com/mnras/article/398/4/1601/981502">&quot;MultiNest: an efficient and robust Bayesian inference tool for cosmology and particle physics&quot;</a></li><li class="footnote" id="footnote-1"><a class="tag is-link" href="#citeref-1">1</a>John Skilling, 2004, AIP 735, 395  <a href="https://aip.scitation.org/doi/abs/10.1063/1.1835238">&quot;Nested Sampling&quot;</a></li><li class="footnote" id="footnote-5"><a class="tag is-link" href="#citeref-5">5</a>Skilling, 2006, Bayesian Anal. 1(4), <a href="https://projecteuclid.org/journals/bayesian-analysis/volume-1/issue-4/Nested-sampling-for-general-Bayesian-computation/10.1214/06-BA127.full">&quot;Nested sampling for general Bayesian computation&quot;</a></li><li class="footnote" id="footnote-5"><a class="tag is-link" href="#citeref-5">5</a>Skilling, 2006, Bayesian Anal. 1(4), <a href="https://projecteuclid.org/journals/bayesian-analysis/volume-1/issue-4/Nested-sampling-for-general-Bayesian-computation/10.1214/06-BA127.full">&quot;Nested sampling for general Bayesian computation&quot;</a></li><li class="footnote" id="footnote-6"><a class="tag is-link" href="#citeref-6">6</a>Neal, 2003, Ann. Statist. 31(3), <a href="https://projecteuclid.org/journals/annals-of-statistics/volume-31/issue-3/Slice-sampling/10.1214/aos/1056562461.full">&quot;Slice Sampling&quot;</a></li><li class="footnote" id="footnote-7"><a class="tag is-link" href="#citeref-7">7</a>Handley, et al., 2015a, MNRAS 450(1), <a href="https://academic.oup.com/mnrasl/article/450/1/L61/986122">&quot;polychord: nested sampling for cosmology&quot;</a></li><li class="footnote" id="footnote-8"><a class="tag is-link" href="#citeref-8">8</a>Handley, et al., 2015b, MNRAS 453(4), <a href="https://academic.oup.com/mnras/article/453/4/4384/2593718">&quot;polychord: next-generation nested sampling&quot;</a></li></ul></section></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../benchmarks/">« Benchmarks</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="auto">Automatic (OS)</option><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option><option value="catppuccin-latte">catppuccin-latte</option><option value="catppuccin-frappe">catppuccin-frappe</option><option value="catppuccin-macchiato">catppuccin-macchiato</option><option value="catppuccin-mocha">catppuccin-mocha</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 1.17.0 on <span class="colophon-date" title="Saturday 1 August 2026 19:14">Saturday 1 August 2026</span>. Using Julia version 1.12.6.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
