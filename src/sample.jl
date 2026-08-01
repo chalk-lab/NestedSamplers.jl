@@ -10,6 +10,12 @@ StatsBase.sample(rng::AbstractRNG, model::AbstractModel, sampler::Nested; kwargs
 StatsBase.sample(model::AbstractModel, sampler::Nested; kwargs...) =
     StatsBase.sample(GLOBAL_RNG, model, sampler; kwargs...)
 
+# AbstractMCMC 5.10 replaced the boolean `progress` keyword with `AbstractProgressKwarg`
+# instances, which are always truthy, so the value has to be inspected by type.
+show_progress(progress::Bool) = progress
+show_progress(::AbstractMCMC.NoLogging) = false
+show_progress(::AbstractMCMC.AbstractProgressKwarg) = true
+
 function nested_isdone(rng, model, sampler, samples, state, i; progress=true, maxiter=Inf, maxcall=Inf, dlogz=0.5, maxlogl=Inf, kwargs...)
     # 1) iterations exceeds maxiter
     done_sampling = state.it ≥ maxiter
@@ -24,7 +30,7 @@ function nested_isdone(rng, model, sampler, samples, state, i; progress=true, ma
     # 5) number of effective samples
     # TODO
 
-    if progress
+    if show_progress(progress)
         str = @sprintf "iter=%d\tncall=%d\tΔlogz=%.2g\tlogl=%.2g\tlogz=%.2g" i state.ncall delta_logz state.logl_dead state.logz
         print("\r\33[2K", str)
     end

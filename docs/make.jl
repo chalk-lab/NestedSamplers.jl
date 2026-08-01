@@ -22,6 +22,7 @@ makedocs(
     ],
     format = Documenter.HTML(prettyurls = get(ENV, "CI", nothing) == "true"),
     modules = [NestedSamplers],
+    checkdocs = :exports,
     # https://github.com/JuliaLang/julia/pull/37085#issuecomment-683356098
     doctestfilters = [
         r"{([a-zA-Z0-9]+,\s?)+[a-zA-Z0-9]+}",
