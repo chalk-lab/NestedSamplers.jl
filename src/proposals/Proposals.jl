@@ -113,6 +113,7 @@ function (prop::RWalk)(
     scale_init = prop.scale
     accept = reject = fail = nfail = nc = ncall = 0
     local du, u_prop, logl_prop, u, v, logl
+    u_walk = point  # current position of the walk
 
     while nc < prop.walks || iszero(accept)
         # get proposed point
@@ -121,7 +122,7 @@ function (prop::RWalk)(
             prop.scale < 1e-5 * scale_init && error("Random walk sampling appears to be stuck.")
             # transform to proposal distribution
             du = randoffset(rng, bounds)
-            u_prop = @. point + prop.scale * du
+            u_prop = @. u_walk + prop.scale * du
             # inside unit-cube
             unitcheck(u_prop) && break
             
@@ -137,7 +138,7 @@ function (prop::RWalk)(
         # check proposed point
         v_prop, logl_prop = prior_transform_and_loglikelihood(model, u_prop)
         if logl_prop ≥ logl_star
-            u = u_prop
+            u = u_walk = u_prop
             v = v_prop
             logl = logl_prop
             accept += 1
@@ -209,7 +210,8 @@ function (prop::RStagger)(
     accept = reject = fail = nfail = nc = ncall = 0
     stagger = 1
     local du, u_prop, logl_prop, u, v, logl
-    
+    u_walk = point  # current position of the walk
+
     while nc < prop.walks || iszero(accept)
         # get proposed point
         while true
@@ -217,7 +219,7 @@ function (prop::RStagger)(
             prop.scale < 1e-5 * scale_init && error("Random walk sampling appears to be stuck.")
             # transform to proposal distribution
             du = randoffset(rng, bounds)
-            u_prop = @. point + prop.scale * stagger * du
+            u_prop = @. u_walk + prop.scale * stagger * du
             # inside unit-cube
             unitcheck(u_prop) && break
             
@@ -233,7 +235,7 @@ function (prop::RStagger)(
         # check proposed point
         v_prop, logl_prop = prior_transform_and_loglikelihood(model, u_prop)
         if logl_prop ≥ logl_star
-            u = u_prop
+            u = u_walk = u_prop
             v = v_prop
             logl = logl_prop
             accept += 1
@@ -296,8 +298,9 @@ function (prop::Slice)(
     # setup
     n = length(point)
     nc = nexpand = ncontract = 0
-    local u, v, logl 
-    
+    local v, logl
+    u = point  # each slice starts where the previous one ended
+
     # modifying axes and computing lengths
     axes = Bounds.axes(bounds)
     axes = prop.scale .* axes'
@@ -314,7 +317,7 @@ function (prop::Slice)(
             axis = axes[idx, :]
             
             u, v, logl, nc, nexpand, ncontract = sample_slice(
-                rng, axis, point, logl_star,
+                rng, axis, u, logl_star,
                 model,
                 nc, nexpand, ncontract
             )
@@ -358,7 +361,8 @@ function (prop::RSlice)(
     # setup
     n = length(point)
     nc = nexpand = ncontract = 0
-    local u, v, logl
+    local v, logl
+    u = point  # each slice starts where the previous one ended
     # random slice sampling loop
     for it in 1:prop.slices
     
@@ -369,7 +373,7 @@ function (prop::RSlice)(
         # transform and scale into parameter space
         axis = prop.scale .* (Bounds.axes(bounds) * drhat)
         u, v, logl, nc, nexpand, ncontract = sample_slice(
-            rng, axis, point, logl_star,
+            rng, axis, u, logl_star,
             model,
             nc, nexpand, ncontract
         )
