@@ -55,3 +55,17 @@ const NMAX = 20
         end
     end
 end # testset
+
+@testset "fit to fewer points than dimensions" begin
+    # Late in a run a (multi-)ellipsoid cluster can hold fewer live points than dimensions, spread over a tiny
+    # region. The covariance is then (nearly) singular; fitting used to break its symmetry and take a pseudo-
+    # inverse with negative eigenvalues, so that `decompose` failed with a DomainError.
+    for n in (5, 10, 20), s in (1e-3, 1e-5), logpointvol in (-5, -40)
+        x = 0.5 .+ s .* randn(rng, 30, n)
+        ell = Bounds.fit(Bounds.Ellipsoid, x; pointvol=exp(logpointvol))
+        @test all(isfinite, ell.axlens) && all(>(0), ell.axlens)
+        @test isfinite(Bounds.volume(ell))
+        @test all(c -> c ∈ ell, eachcol(x))
+        @test issymmetric(ell.A)
+    end
+end

@@ -104,8 +104,12 @@ function fit(E::Type{<:Ellipsoid{R}}, x::AbstractMatrix{S}; pointvol = 0) where 
     targetprod = (npoints * pointvol / volume_prefactor(ndim))^2
     make_eigvals_positive!(cov, targetprod)
 
-    # get transformation matrix. Note: use pinv to avoid error when cov is all zeros
-    A = pinv(cov)
+    # get transformation matrix A = cov⁻¹ from the eigendecomposition, with the condition number of cov capped
+    # at 1e12 (as dynesty does), so that A is symmetric positive definite even when the points (nearly) span a
+    # lower-dimensional subspace. If cov is all zeros, A is zero, as `pinv` gave before.
+    F = eigen(Symmetric(cov))
+    λmax = maximum(F.values)
+    A = λmax > 0 ? Matrix(Symmetric(F.vectors * Diagonal(inv.(max.(F.values, λmax / 1e12))) * F.vectors')) : zero(cov)
 
     # calculate expansion factor necessary to bound each points
     f = diag(delta' * (A * delta))
@@ -166,13 +170,13 @@ function randball(rng::AbstractRNG, T::Type, D::Integer)
 end
 
 function make_eigvals_positive!(cov::AbstractMatrix, targetprod)
-    E = eigen(cov)
+    E = eigen(Symmetric(cov))
     mask = E.values .< 1e-10
     if any(mask)
         nzprod = prod(E.values[.!mask])
         nzeros = count(mask)
         E.values[mask] .= (targetprod / nzprod)^(1 / nzeros)
-        cov .= E.vectors * Diagonal(E.values) / E.vectors
+        cov .= Symmetric(E.vectors * Diagonal(E.values) * E.vectors')  # keep cov exactly symmetric
     end
     return cov
 end
