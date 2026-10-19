@@ -83,3 +83,13 @@ end
     @test_throws AssertionError Proposals.RSlice(slices=-2)
     @test_throws AssertionError Proposals.RSlice(scale=-3)
 end
+
+@testset "walks and slices continue from the last accepted point - $(nameof(typeof(prop)))" for prop in (
+    Proposals.RWalk(), Proposals.RStagger(), Proposals.Slice(), Proposals.RSlice()
+)
+    # When every step restarted from the initial live point, the new live points stayed too close to the
+    # old ones: ln Z came out too high (RWalk: about +2 at D = 10, +14 at D = 30) and posteriors too narrow.
+    model, lnZ = Models.CorrelatedGaussian(10)
+    _, state = sample(StableRNG(1), model, Nested(10, 500; proposal=prop); dlogz=0.01, progress=false)
+    @test abs(state.logz - lnZ) < 1
+end
